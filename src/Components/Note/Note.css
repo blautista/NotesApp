@@ -4,6 +4,7 @@
     width:400px;
     background:#eee;    
     border-radius: 5px;
+    border: 1px solid gray;
 }
 
 h1 {
