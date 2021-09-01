@@ -1,27 +1,59 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Notes from './Components/Notes'
+import NewNote from './Components/NewNote'
 
 const App = () => {
-  const text = 'hi';
-  console.log(text);
-  const notesArray = [
+
+  const DummyArray = [
     {
-      title: 'Hola!',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc bibendum auctor purus at volutpat. Etiam quam lectus, porttitor ut tellus id, venenatis aliquam ligula. Maecenas ac nibh feugiat, commodo orci elementum, semper nibh. Nullam at elit mattis, porta justo nec, interdum massa. Fusce ultrices aliquet dictum. Etiam at quam eget nisi condimentum consectetur. Nullam egestas quis orci in iaculis. Morbi sed purus et dolor gravida scelerisque ornare lacinia magna. Donec fermentum justo finibus eros tincidunt semper. Nullam rutrum diam eu finibus cursus. Phasellus in feugiat quam, ac consequat lectus. Nam quis maximus libero. Maecenas id dignissim augue, in commodo ipsum. Mauris tristique commodo mauris, gravida accumsan sapien aliquam at.'
+      id:Math.random().toString(),
+      title: 'Start Here!',
+      content: 'Click to edit',
+      isEditing:false
     },
     {
-      title: 'Hola2!',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc bibendum auctor purus at volutpat. Etiam quam lectus, porttitor ut tellus id, venenatis aliquam ligula. Maecenas ac nibh feugiat, commodo orci elementum, semper nibh. Nullam at elit mattis, porta justo nec, interdum massa. Fusce ultrices aliquet dictum. Etiam at quam eget nisi condimentum consectetur. Nullam egestas quis orci in iaculis. Morbi sed purus et dolor gravida scelerisque ornare lacinia magna. Donec fermentum justo finibus eros tincidunt semper. Nullam rutrum diam eu finibus cursus. Phasellus in feugiat quam, ac consequat lectus. Nam quis maximus libero. Maecenas id dignissim augue, in commodo ipsum. Mauris tristique commodo mauris, gravida accumsan sapien aliquam at.'
-    },
-    {
-      title: 'Hola3!',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc bibendum auctor purus at volutpat. Etiam quam lectus, porttitor ut tellus id, venenatis aliquam ligula. Maecenas ac nibh feugiat, commodo orci elementum, semper nibh. Nullam at elit mattis, porta justo nec, interdum massa. Fusce ultrices aliquet dictum. Etiam at quam eget nisi condimentum consectetur. Nullam egestas quis orci in iaculis. Morbi sed purus et dolor gravida scelerisque ornare lacinia magna. Donec fermentum justo finibus eros tincidunt semper. Nullam rutrum diam eu finibus cursus. Phasellus in feugiat quam, ac consequat lectus. Nam quis maximus libero. Maecenas id dignissim augue, in commodo ipsum. Mauris tristique commodo mauris, gravida accumsan sapien aliquam at.'
-    },
+      id:Math.random().toString(),
+      title: 'Start Here!',
+      content: 'Click to edit',
+      isEditing:false
+    }
   ];
+
+  const [notes, setNotes] = useState(DummyArray);
+
+  const addNote = (noteData) => {
+    noteData.id=Math.random().toString();
+    setNotes((oldnotes) => {
+      return [...oldnotes, noteData];
+    });
+  };
+
+  const refactorNotesArray = (data) => {
+    
+    setNotes((oldNotes) => {
+      const newNotes = [...oldNotes];
+      const index = newNotes.findIndex((note) => note.id === data.id);
+      newNotes[index] = data;
+      console.log(newNotes);
+      return newNotes;
+    });
+  };
+
+  const removeNote = (data) => {
+    setNotes((oldNotes) => {
+      const newNotes = [...oldNotes];
+      const index = newNotes.findIndex((note) => note.id === data.id);
+      newNotes.splice(index, 1);
+      console.log(newNotes);
+      return newNotes;
+    });
+  }
+
   return (
-    <div>
-      <Notes notesArray={notesArray}/>
+    <div className="main-container">
+      <NewNote onAddNote={addNote}/>
+      <Notes notesArray={notes} onNoteChange={refactorNotesArray} onNoteRemoval={removeNote}/>
     </div>  
   );
 };

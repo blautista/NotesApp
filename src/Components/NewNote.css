@@ -1,0 +1,15 @@
+button {
+    border: 1px solid gray;
+    border-radius: 10px;
+    background:none;
+    cursor:pointer;
+    padding:16px;
+    margin:16px;  
+    transition: background .4s;  
+    width:200px;
+}
+
+button:hover {
+    background:#eee;
+
+}
