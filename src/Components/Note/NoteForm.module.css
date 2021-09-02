@@ -1,11 +1,11 @@
-form {
+.note-form {
     width:100%;
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-input {
+.title {
     width:90%;
     height:50px;
     padding:8px;
@@ -17,7 +17,7 @@ input {
     background:none;
 }
 
-textarea {
+.content {
     padding:8px;
     margin-top:8px;
     width:90%;
@@ -27,4 +27,8 @@ textarea {
     overflow:scroll;
     overflow-x:hidden;
     background:none;
+}
+
+.submit {
+    padding:4px;
 }

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import Notes from './Components/Notes'
 import NewNote from './Components/NewNote'
+import Header from './Components/UI/Header/Header'
 
 const App = () => {
 
@@ -52,6 +53,7 @@ const App = () => {
 
   return (
     <div className="main-container">
+      <Header></Header>
       <NewNote onAddNote={addNote}/>
       <Notes notesArray={notes} onNoteChange={refactorNotesArray} onNoteRemoval={removeNote}/>
     </div>  

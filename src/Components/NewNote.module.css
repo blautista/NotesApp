@@ -1,4 +1,4 @@
-button {
+.new-note-button {
     border: 1px solid gray;
     border-radius: 10px;
     background:none;
@@ -9,7 +9,7 @@ button {
     width:200px;
 }
 
-button:hover {
+.new-note-button:hover {
     background:#eee;
 
 }

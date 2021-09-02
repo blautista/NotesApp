@@ -1,5 +1,5 @@
 import React from 'react';
-import './NewNote.css';
+import styles from './NewNote.module.css';
 
 const NewNote = (props) => {
 
@@ -9,7 +9,7 @@ const NewNote = (props) => {
 
     return (
         <div>
-            <button type="button" onClick={addNewNote}>
+            <button className={styles['new-note-button']} type="button" onClick={addNewNote}>
                 <h2>Create New Note</h2>
             </button>
         </div>

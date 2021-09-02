@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './NoteForm.css';
+import styles from './NoteForm.module.css';
 
 const NoteForm = (props) => {
     const [title, setTitle] = useState(props.data.title);
@@ -29,10 +29,10 @@ const NoteForm = (props) => {
         setTitle(e.target.value);
     }
     return (
-        <form onSubmit={saveChanges}>
-            <input type="text" value={title} placeholder='Title' onChange={setTitleHandler}></input>
-            <textarea placeholder="your text goes here" onChange={setContentHandler} value={content}></textarea>
-            <button type="submit">save changes</button>
+        <form className={styles['note-form']} onSubmit={saveChanges}>
+            <input className={styles['title']}type="text" value={title} placeholder='Title' onChange={setTitleHandler}></input>
+            <textarea className={styles['content']} placeholder="your text goes here" onChange={setContentHandler} value={content}></textarea>
+            <button className={styles['submit']} type="submit">save changes</button>
         </form>
     );
 };

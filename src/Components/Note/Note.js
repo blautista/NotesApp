@@ -24,7 +24,6 @@ const Note = (props) => {
             <p>{props.data.content}</p>
             <button type="button" onClick={removeNote}>remove</button>
         </div>; 
-
     if (isEditing) {
         noteContent = <NoteForm data={props.data} onFormSubmit={saveChanges}/>
     } 
