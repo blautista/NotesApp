@@ -5,9 +5,13 @@ import Logo from './Logo.js';
 import Nav from './Nav.js';
 
 const Header = () => {
+    const showSidebar = () => {
+
+    }
+    
     return (
         <header className={styles['header']}>
-            <Logo></Logo>
+            <Logo onShowSidebar={showSidebar}></Logo>
             <Nav></Nav>
         </header>
     );

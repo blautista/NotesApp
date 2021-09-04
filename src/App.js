@@ -16,6 +16,16 @@ const App = () => {
       id:Math.random().toString(),
       title: 'Note2!',
       content: 'Click to edit'
+    },
+    {
+      id:Math.random().toString(),
+      title: 'Note3!',
+      content: 'Click to edit'
+    },
+    {
+      id:Math.random().toString(),
+      title: 'Note4!',
+      content: 'Click to edit'
     }
   ];
 
@@ -44,10 +54,10 @@ const App = () => {
     
   };
 
-  const removeNote = (data) => {
+  const removeNote = (id) => {
     setNotes((oldNotes) => {
       const newNotes = [...oldNotes];
-      const index = newNotes.findIndex((note) => note.id === data.id);
+      const index = newNotes.findIndex((note) => note.id === id);
       newNotes.splice(index, 1);
       return newNotes;
     });

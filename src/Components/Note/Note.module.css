@@ -22,3 +22,9 @@ button {
 p {
     white-space: pre-wrap;
 }
+
+@media (max-width: 768px) {
+    .note-container {
+        width:100%;
+    }
+}

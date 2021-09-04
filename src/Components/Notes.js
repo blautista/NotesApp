@@ -17,8 +17,8 @@ const Notes = (props) => {
         props.onNoteChange(data);
     }
 
-    function handleNoteRemoval(data) {
-        props.onNoteRemoval(data);
+    function handleNoteRemoval(id) {
+        props.onNoteRemoval(id);
     }
 
     function logclick (w) {

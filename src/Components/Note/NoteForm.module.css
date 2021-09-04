@@ -9,7 +9,7 @@
     width:90%;
     height:50px;
     padding:8px;
-    font-size:2rem;
+    font-size:3rem;
     border:none;
     outline:none;
     overflow:scroll;
@@ -25,7 +25,7 @@
     height: clamp(200px,400px, 800px);
     border:none;
     outline:none;
-    overflow:scroll;
+    overflow:hidden;
     overflow-x:hidden;
     background:none;
 }

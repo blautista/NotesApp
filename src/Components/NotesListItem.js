@@ -8,17 +8,17 @@ const NotesListItem = (props) => {
     }
 
     const deleteNote = () => {
-        props.onItemDelete(props.id);
+        props.onItemDelete(props.data.id);
     }
     
     return (
         <React.Fragment>
-            <li onClick={changeNote} 
+            <li  
                 className={`${styles['note-list-item']} ${(props.isActive) ? styles['active'] : ''}`}>
-                <div onClick={deleteNote}>
+                <div className={`${styles['icon-container']}`} onClick={deleteNote}>
                     <TrashCan fill='purple' className={styles['trash-can-svg']}/>
                 </div>
-                <span>{props.data.title}</span>
+                <div className={styles.title} onClick={changeNote}>{props.data.title}</div>
             </li>
         </React.Fragment>
     );
