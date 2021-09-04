@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import Notes from './Components/Notes'
-import NewNote from './Components/NewNote'
+import Note from './Components/Note/Note';
 import Header from './Components/UI/Header/Header'
 
 const App = () => {
@@ -9,19 +9,18 @@ const App = () => {
   const DummyArray = [
     {
       id:Math.random().toString(),
-      title: 'Start Here!',
-      content: 'Click to edit',
-      isEditing:false
+      title: 'Note1!',
+      content: 'Click to edit'
     },
     {
       id:Math.random().toString(),
-      title: 'Start Here!',
-      content: 'Click to edit',
-      isEditing:false
+      title: 'Note2!',
+      content: 'Click to edit'
     }
   ];
 
   const [notes, setNotes] = useState(DummyArray);
+  const [activeNote, setActiveNote] = useState(DummyArray[0]);
 
   const addNote = (noteData) => {
     noteData.id=Math.random().toString();
@@ -30,8 +29,11 @@ const App = () => {
     });
   };
 
-  const refactorNotesArray = (data) => {
-    
+  const changeActiveNote = (noteData) => {
+    setActiveNote({...noteData});
+  }
+
+  const saveNoteData = (data) => {
     setNotes((oldNotes) => {
       const newNotes = [...oldNotes];
       const index = newNotes.findIndex((note) => note.id === data.id);
@@ -39,6 +41,7 @@ const App = () => {
       console.log(newNotes);
       return newNotes;
     });
+    
   };
 
   const removeNote = (data) => {
@@ -46,16 +49,24 @@ const App = () => {
       const newNotes = [...oldNotes];
       const index = newNotes.findIndex((note) => note.id === data.id);
       newNotes.splice(index, 1);
-      console.log(newNotes);
       return newNotes;
     });
   }
 
   return (
     <div className="main-container">
-      <Header></Header>
-      <NewNote onAddNote={addNote}/>
-      <Notes notesArray={notes} onNoteChange={refactorNotesArray} onNoteRemoval={removeNote}/>
+      <Header/>
+      <section className="app-container">
+        <Notes 
+          notesArray={notes} 
+          onNoteAdd={addNote} 
+          onNoteChange={changeActiveNote} 
+          onNoteRemoval={removeNote}
+          activeNoteId={activeNote.id}
+        />
+        <Note key={activeNote.id} data={activeNote} onNoteDataSaveRequest={saveNoteData}></Note>
+      </section>
+      {/* <NewNote onAddNote={addNote}/> */}
     </div>  
   );
 };

@@ -1,0 +1,67 @@
+.notes-container {
+    display:flex;
+    flex-direction: column;
+    flex-wrap:wrap; 
+    width:20%;
+    /* justify-content: center; */
+    align-items: center;
+    /* border-right:1px solid lightgray; */
+    background:white;
+}
+
+.note-list {
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    width:100%;
+    /* padding:4px; */
+}
+
+.note-list-item {
+    width:100%;
+    /* padding:8px; */
+    height:60px;
+    cursor:pointer;
+    font-weight: bold;
+    display:flex;
+    align-items: center;
+    /* text-align: center; */
+    font-size:1.8rem;
+    border-bottom: 1px solid lightgray;
+}
+
+.note-list-item:hover {
+    border-right:4px solid purple;
+    /* box-shadow:0px 10px 10px 1px rgba(0,0,0,0.1); */
+}
+
+.note-list-item.active {
+    border-right:4px solid purple;
+    box-shadow:0px 10px 10px 1px rgba(0,0,0,0.1);
+}
+
+.note-list-item span {
+    padding-left:4px;
+}
+
+.note-list-item .trash-can-svg {
+    /* stroke:purple; */
+    padding:8px;
+    width:35px;
+    height:35px;
+    border-radius: 10px;
+    transition:background-color .2s;
+}
+
+.note-list-item .trash-can-svg:hover {
+    background-color:rgb(255, 198, 198);
+    
+}
+
+@media (max-width: 500px) {
+    .notes-container {
+        display:flex;
+        flex-direction: column;
+    }
+}

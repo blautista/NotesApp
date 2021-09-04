@@ -5,34 +5,45 @@ const NoteForm = (props) => {
     const [title, setTitle] = useState(props.data.title);
     const [content, setContent] = useState(props.data.content);
 
-    function saveChanges (e) {
-        e.preventDefault();
-
-        let text = content.replace(/\n\r?/g, '<br />');
+    function saveChanges (what, from) {
 
         const newValues = {
             id: props.data.id,
             title: title,
-            content: content,
-            isEditing:false
+            content: content
         };
-        console.log(content);
-        props.onFormSubmit(newValues);
+
+        newValues[from] = what;
+
+        props.onFormChange(newValues);
     }
 
     function setContentHandler (e) {
-        
+        saveChanges(e.target.value, 'content');
         setContent(e.target.value);
     }
     
     function setTitleHandler (e) {
+        
+        saveChanges(e.target.value, 'title');
         setTitle(e.target.value);
+
     }
     return (
-        <form className={styles['note-form']} onSubmit={saveChanges}>
-            <input className={styles['title']}type="text" value={title} placeholder='Title' onChange={setTitleHandler}></input>
-            <textarea className={styles['content']} placeholder="your text goes here" onChange={setContentHandler} value={content}></textarea>
-            <button className={styles['submit']} type="submit">save changes</button>
+        <form className={styles['note-form']}>
+            <input 
+                className={styles['title']}
+                type="text" 
+                value={title} 
+                placeholder='Title' 
+                onChange={setTitleHandler}
+            /> 
+            <textarea 
+                className={styles['content']} 
+                placeholder="your text goes here" 
+                onChange={setContentHandler} 
+                value={content}>
+            </textarea>
         </form>
     );
 };

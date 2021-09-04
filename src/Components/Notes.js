@@ -1,8 +1,17 @@
 import React from 'react';
-import Note from './Note/Note';
-import './Notes.css';
+import styles from './Notes.module.css';
+import NewNote from './NewNote';
+import NotesListItem from './NotesListItem';
 
 const Notes = (props) => {
+
+    function addNote (data) {
+        props.onNoteAdd(data);
+    }
+
+    function changeCurrentNote (data) {
+        props.onNoteChange(data)
+    }
 
     function handleChangedData(data) {
         props.onNoteChange(data);
@@ -16,12 +25,21 @@ const Notes = (props) => {
         console.log(w);
     }
     return (
-        <div className='notes-container'>
+        <div className={styles['notes-container']}>
+            <ul className={styles['note-list']}>
             {
                 props.notesArray.map(noteData => 
-                    <Note key={noteData.id} data={noteData} onNoteRemoval={handleNoteRemoval} onNoteDataChange={handleChangedData}/>
+                    <NotesListItem 
+                        onItemClick={changeCurrentNote} 
+                        key={noteData.id} 
+                        onNoteRemoval={handleNoteRemoval}
+                        data={noteData}
+                        isActive={props.activeNoteId === noteData.id}
+                        onItemDelete={handleNoteRemoval}/>
                 )
             }
+            </ul>
+            <NewNote onAddNote={addNote}></NewNote>
         </div>
     );
 };

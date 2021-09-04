@@ -4,7 +4,7 @@ import styles from './NewNote.module.css';
 const NewNote = (props) => {
 
     const addNewNote = () => {
-        props.onAddNote({title: '', content:'', isEditing:true});
+        props.onAddNote({title: 'Title', content:'Edit me!'});
     }
 
     return (
