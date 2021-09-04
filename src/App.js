@@ -29,18 +29,25 @@ const App = () => {
     }
   ];
 
+  const isScreenMobileSized = () => {
+    return (window.innerWidth <= 768);
+  }
+
   const [notes, setNotes] = useState(DummyArray);
   const [activeNote, setActiveNote] = useState(DummyArray[0]);
+  const [isSidebarActive, setSidebarActive] = useState(true);
 
   const addNote = (noteData) => {
     noteData.id=Math.random().toString();
     setNotes((oldnotes) => {
       return [...oldnotes, noteData];
     });
+    setActiveNote(noteData);
   };
 
   const changeActiveNote = (noteData) => {
     setActiveNote({...noteData});
+    if (isScreenMobileSized) setSidebarActive(false);
   }
 
   const saveNoteData = (data) => {
@@ -63,9 +70,13 @@ const App = () => {
     });
   }
 
+  const showSidebar = () => {
+    setSidebarActive(true);
+  }
+
   return (
     <div className="main-container">
-      <Header/>
+      <Header onShowSidebar={showSidebar}/>
       <section className="app-container">
         <Notes 
           notesArray={notes} 
@@ -73,6 +84,8 @@ const App = () => {
           onNoteChange={changeActiveNote} 
           onNoteRemoval={removeNote}
           activeNoteId={activeNote.id}
+          isOpen={isSidebarActive}
+          isScreenMobileSized={isScreenMobileSized}
         />
         <Note key={activeNote.id} data={activeNote} onNoteDataSaveRequest={saveNoteData}></Note>
       </section>

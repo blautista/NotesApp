@@ -24,8 +24,24 @@ const Notes = (props) => {
     function logclick (w) {
         console.log(w);
     }
+
+    function setStyles () {
+        let baseStyle = `${styles['notes-container']} `;
+        let statusStyle;
+        if (props.isScreenMobileSized)  {
+            if (props.isOpen) {
+                statusStyle=`${styles['open']}`;
+            } else {
+                statusStyle=`${styles['closed']}`;
+            }
+        } else {
+            statusStyle = `${styles['open']}`;
+        }
+        return baseStyle.concat(statusStyle);
+    }
     return (
-        <div className={styles['notes-container']}>
+        <div 
+            className={`${setStyles()}`}>
             <ul className={styles['note-list']}>
             {
                 props.notesArray.map(noteData => 

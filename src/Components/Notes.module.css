@@ -3,11 +3,33 @@
     flex-direction: column;
     flex-wrap:wrap; 
     width: 30%;
+    min-width: 250px;
     max-width: 300px;
     /* justify-content: center; */
     align-items: center;
     /* border-right:1px solid lightgray; */
     background:white;
+}
+
+.notes-container.open {
+    display:flex;
+    position:fixed;
+    animation: slideInFromLeft .3s;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.notes-container.closed {
+    display:none;
 }
 
 .note-list {
@@ -49,6 +71,7 @@
     flex-grow:1;
     align-self: center;
     height:100%;
+    overflow-x: hidden;
     display: flex; align-items: center;
 }
 
@@ -73,6 +96,19 @@
 
 @media (max-width: 768px) {
     .notes-container {
-        display:none;
+        
+    }
+}
+
+@media (min-width: 768px) {
+    .notes-container.open {
+        position:relative;
+    }
+    .notes-container.closed {
+        position:relative;
+        display:flex;
+    }
+    .notes-container {
+        display:flex;
     }
 }
