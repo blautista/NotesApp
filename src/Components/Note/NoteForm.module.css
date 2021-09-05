@@ -16,6 +16,7 @@
     overflow-x:hidden;
     background:none;
     border-bottom: 1px solid lightgray;
+    font-family: 'Kaisei Tokumin', serif;
 }
 
 .content {
@@ -25,7 +26,8 @@
     height: clamp(200px,400px, 800px);
     border:none;
     outline:none;
-    overflow:hidden;
+    font-family: 'Klee One', cursive;
+    overflow:auto;
     overflow-x:hidden;
     background:none;
 }

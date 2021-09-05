@@ -13,35 +13,18 @@ const Notes = (props) => {
         props.onNoteChange(data)
     }
 
-    function handleChangedData(data) {
-        props.onNoteChange(data);
-    }
-
     function handleNoteRemoval(id) {
         props.onNoteRemoval(id);
     }
 
-    function logclick (w) {
-        console.log(w);
-    }
-
     function setStyles () {
-        let baseStyle = `${styles['notes-container']} `;
-        let statusStyle;
-        if (props.isScreenMobileSized)  {
-            if (props.isOpen) {
-                statusStyle=`${styles['open']}`;
-            } else {
-                statusStyle=`${styles['closed']}`;
-            }
-        } else {
-            statusStyle = `${styles['open']}`;
-        }
-        return baseStyle.concat(statusStyle);
+        let statusStyle = `${styles['open']}`;
+        if (props.isScreenMobileSized && !props.isOpen)  statusStyle = `${styles['closed']}`;
+        return statusStyle;
     }
     return (
         <div 
-            className={`${setStyles()}`}>
+            className={`${styles['notes-container']} ${setStyles()}`}>
             <ul className={styles['note-list']}>
             {
                 props.notesArray.map(noteData => 
@@ -55,7 +38,7 @@ const Notes = (props) => {
                 )
             }
             </ul>
-            <NewNote onAddNote={addNote}></NewNote>
+            <NewNote className={styles['new-note-button']} onAddNote={addNote}></NewNote>
         </div>
     );
 };

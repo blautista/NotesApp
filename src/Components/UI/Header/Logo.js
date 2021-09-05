@@ -5,7 +5,6 @@ const Logo = (props) => {
 
     const handleLogoClick = () => {
         if (window.innerWidth <= 768 ) {
-            console.log('clicked on ham menu');
             props.onShowSidebar();
         }
     }

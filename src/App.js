@@ -10,22 +10,26 @@ const App = () => {
     {
       id:Math.random().toString(),
       title: 'Note1!',
-      content: 'Click to edit'
+      content: 'Click to edit',
+      noteColor: 'beige'
     },
     {
       id:Math.random().toString(),
       title: 'Note2!',
-      content: 'Click to edit'
+      content: 'Click to edit',
+      noteColor: '#eee'
     },
     {
       id:Math.random().toString(),
       title: 'Note3!',
-      content: 'Click to edit'
+      content: 'Click to edit',
+      noteColor: 'white'
     },
     {
       id:Math.random().toString(),
       title: 'Note4!',
-      content: 'Click to edit'
+      content: 'Click to edit',
+      noteColor: 'lightcoral'
     }
   ];
 
@@ -71,7 +75,9 @@ const App = () => {
   }
 
   const showSidebar = () => {
-    setSidebarActive(true);
+    setSidebarActive((oldState) => {
+      return (oldState === true) ? false : true;
+    });
   }
 
   return (
