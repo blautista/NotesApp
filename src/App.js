@@ -1,36 +1,60 @@
 import React, {useState} from 'react';
 import './App.css';
 import Notes from './Components/Notes'
-import NewNote from './Components/NewNote'
+import Note from './Components/Note/Note';
+import Header from './Components/UI/Header/Header'
 
 const App = () => {
 
   const DummyArray = [
     {
       id:Math.random().toString(),
-      title: 'Start Here!',
+      title: 'Note1!',
       content: 'Click to edit',
-      isEditing:false
+      noteColor: 'beige'
     },
     {
       id:Math.random().toString(),
-      title: 'Start Here!',
+      title: 'Note2!',
       content: 'Click to edit',
-      isEditing:false
+      noteColor: '#eee'
+    },
+    {
+      id:Math.random().toString(),
+      title: 'Note3!',
+      content: 'Click to edit',
+      noteColor: 'white'
+    },
+    {
+      id:Math.random().toString(),
+      title: 'Note4!',
+      content: 'Click to edit',
+      noteColor: 'lightcoral'
     }
   ];
 
+  const isScreenMobileSized = () => {
+    return (window.innerWidth <= 768);
+  }
+
   const [notes, setNotes] = useState(DummyArray);
+  const [activeNote, setActiveNote] = useState(DummyArray[0]);
+  const [isSidebarActive, setSidebarActive] = useState(true);
 
   const addNote = (noteData) => {
     noteData.id=Math.random().toString();
     setNotes((oldnotes) => {
       return [...oldnotes, noteData];
     });
+    setActiveNote(noteData);
   };
 
-  const refactorNotesArray = (data) => {
-    
+  const changeActiveNote = (noteData) => {
+    setActiveNote({...noteData});
+    if (isScreenMobileSized) setSidebarActive(false);
+  }
+
+  const saveNoteData = (data) => {
     setNotes((oldNotes) => {
       const newNotes = [...oldNotes];
       const index = newNotes.findIndex((note) => note.id === data.id);
@@ -38,22 +62,40 @@ const App = () => {
       console.log(newNotes);
       return newNotes;
     });
+    
   };
 
-  const removeNote = (data) => {
+  const removeNote = (id) => {
     setNotes((oldNotes) => {
       const newNotes = [...oldNotes];
-      const index = newNotes.findIndex((note) => note.id === data.id);
+      const index = newNotes.findIndex((note) => note.id === id);
       newNotes.splice(index, 1);
-      console.log(newNotes);
       return newNotes;
+    });
+  }
+
+  const showSidebar = () => {
+    setSidebarActive((oldState) => {
+      return (oldState === true) ? false : true;
     });
   }
 
   return (
     <div className="main-container">
-      <NewNote onAddNote={addNote}/>
-      <Notes notesArray={notes} onNoteChange={refactorNotesArray} onNoteRemoval={removeNote}/>
+      <Header onShowSidebar={showSidebar}/>
+      <section className="app-container">
+        <Notes 
+          notesArray={notes} 
+          onNoteAdd={addNote} 
+          onNoteChange={changeActiveNote} 
+          onNoteRemoval={removeNote}
+          activeNoteId={activeNote.id}
+          isOpen={isSidebarActive}
+          isScreenMobileSized={isScreenMobileSized}
+        />
+        <Note key={activeNote.id} data={activeNote} onNoteDataSaveRequest={saveNoteData}></Note>
+      </section>
+      {/* <NewNote onAddNote={addNote}/> */}
     </div>  
   );
 };

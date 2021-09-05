@@ -1,27 +1,44 @@
 import React from 'react';
-import Note from './Note/Note';
-import './Notes.css';
+import styles from './Notes.module.css';
+import NewNote from './NewNote';
+import NotesListItem from './NotesListItem';
 
 const Notes = (props) => {
 
-    function handleChangedData(data) {
-        props.onNoteChange(data);
+    function addNote (data) {
+        props.onNoteAdd(data);
     }
 
-    function handleNoteRemoval(data) {
-        props.onNoteRemoval(data);
+    function changeCurrentNote (data) {
+        props.onNoteChange(data)
     }
 
-    function logclick (w) {
-        console.log(w);
+    function handleNoteRemoval(id) {
+        props.onNoteRemoval(id);
+    }
+
+    function setStyles () {
+        let statusStyle = `${styles['open']}`;
+        if (props.isScreenMobileSized && !props.isOpen)  statusStyle = `${styles['closed']}`;
+        return statusStyle;
     }
     return (
-        <div className='notes-container'>
+        <div 
+            className={`${styles['notes-container']} ${setStyles()}`}>
+            <ul className={styles['note-list']}>
             {
                 props.notesArray.map(noteData => 
-                    <Note key={noteData.id} data={noteData} onNoteRemoval={handleNoteRemoval} onNoteDataChange={handleChangedData}/>
+                    <NotesListItem 
+                        onItemClick={changeCurrentNote} 
+                        key={noteData.id} 
+                        onNoteRemoval={handleNoteRemoval}
+                        data={noteData}
+                        isActive={props.activeNoteId === noteData.id}
+                        onItemDelete={handleNoteRemoval}/>
                 )
             }
+            </ul>
+            <NewNote className={styles['new-note-button']} onAddNote={addNote}></NewNote>
         </div>
     );
 };

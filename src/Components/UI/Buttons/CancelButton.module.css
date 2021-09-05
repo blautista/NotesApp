@@ -1,0 +1,15 @@
+.cancel-button {
+    background:#ffffff;
+    margin:8px;
+    border:1px solid gray;
+    border-radius: 10px;
+    color:#888;
+    width:auto;
+    min-width: 80px;
+    transition: box-shadow .1s;
+}
+
+.cancel-button:hover {
+    box-shadow: 0 5px 10px 4px rgba(0,0,0,0.1);
+    color:black;
+}
