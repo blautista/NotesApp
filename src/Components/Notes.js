@@ -1,20 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './Notes.module.css';
 import NewNote from './NewNote';
 import NotesListItem from './NotesListItem';
+import SearchBar from './SearchBar';
 
 const Notes = (props) => {
+
+    const [filter, setFilter] = useState('');
 
     function addNote (data) {
         props.onNoteAdd(data);
     }
 
     function changeCurrentNote (data) {
-        props.onNoteChange(data)
+        props.onNoteChange(data);
+        // setFilter('');
     }
 
     function handleNoteRemoval(id) {
         props.onNoteRemoval(id);
+    }
+
+    const changeFilter = (term) => {
+        setFilter(term);
+    }
+
+    function filterNotes (searchTerm) {
+        let filteredNotes;
+        if (searchTerm) 
+        filteredNotes = props.notesArray.filter(note => note.title.toLowerCase().includes(searchTerm.toLowerCase()));
+        else 
+        filteredNotes=props.notesArray;
+        return filteredNotes;
     }
 
     function setStyles () {
@@ -25,9 +42,10 @@ const Notes = (props) => {
     return (
         <div 
             className={`${styles['notes-container']} ${setStyles()}`}>
+            <SearchBar onSearch={changeFilter}/>
             <ul className={styles['note-list']}>
-            {
-                props.notesArray.map(noteData => 
+            {(filterNotes(filter).length > 0) &&
+                filterNotes(filter).map(noteData => 
                     <NotesListItem 
                         onItemClick={changeCurrentNote} 
                         key={noteData.id} 
@@ -37,6 +55,7 @@ const Notes = (props) => {
                         onItemDelete={handleNoteRemoval}/>
                 )
             }
+            {(filterNotes(filter).length === 0) && <li>No notes found</li>}
             </ul>
             <NewNote className={styles['new-note-button']} onAddNote={addNote}></NewNote>
         </div>

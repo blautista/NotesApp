@@ -48,6 +48,7 @@ const App = () => {
     });
     setActiveNote(noteData);
   };
+  
 
   const changeActiveNote = (noteData) => {
     setActiveNote({...noteData});
