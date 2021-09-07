@@ -9,10 +9,10 @@
     width:90%;
     height:50px;
     padding:8px;
-    font-size:3rem;
+    font-size:2rem;
     border:none;
     outline:none;
-    overflow:scroll;
+    overflow:hidden;
     overflow-x:hidden;
     background:none;
     border-bottom: 1px solid lightgray;

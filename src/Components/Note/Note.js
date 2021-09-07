@@ -6,12 +6,8 @@ import {ReactComponent as PaletteIcon} from './palette_black_24dp.svg';
 
 const Note = (props) => {
 
-    const [tweetContent, setTweetContent] = useState(props.data.title); 
+    // const [tweetContent, setTweetContent] = useState(props.data.title); 
     const [noteColor, setNoteColor] = useState(props.data.noteColor);
-
-    function makeSelectionBold() {
-        let textToBeBolded = window.getSelection().toString();
-    }
 
     const saveChanges = (data) => {
         props.onNoteDataSaveRequest({...data, noteColor: noteColor});
