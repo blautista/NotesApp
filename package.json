@@ -18,7 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage":"C:/Users/bauti/Documents/web stuff/NotesApp/build",
+  "homepage": "C:/Users/bauti/Documents/web stuff/NotesApp/build",
   "eslintConfig": {
     "extends": "react-app"
   },

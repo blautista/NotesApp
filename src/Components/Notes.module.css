@@ -50,6 +50,7 @@
     align-items: center;
     font-size:1.8rem;
     border-bottom: 1px solid lightgray;
+    transition: .1s border-right;
 }
 
 .note-list-item:hover {

@@ -29,6 +29,8 @@ button {
 
 .app-container {
     display:flex;
+    max-width: 1000px;
+    align-self: center;
     width:100%;
     height:calc(100vh - 60px);
 }

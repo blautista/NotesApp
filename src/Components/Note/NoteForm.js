@@ -11,8 +11,8 @@ const NoteForm = (props) => {
 
         const newValues = {
             id: props.data.id,
-            title: titleInput.current.innerText,
-            content: contentInput.current.innerText
+            title: titleInput.current.innerHTML,
+            content: contentInput.current.innerHTML
         };
 
         newValues[from] = what;
@@ -25,11 +25,28 @@ const NoteForm = (props) => {
         // setContent(e.target.value);
     }
 
+    const boldenText = (e) => {
+        const selectionStart = document.getSelection().anchorOffset;
+        const selectionEnd = document.getSelection().focusOffset;
+        const range = document.getSelection().getRangeAt(0);
+        console.log(range.startContainer);
+        console.log(range.endContainer);
+
+        // console.log(selectionStart);
+        // console.log(selectionEnd);
+        const inputContent = contentInput.current.innerText; 
+        const textToBolden = document.getSelection().toString();
+        const secondChunk = inputContent.substr(selectionEnd, inputContent.length);
+        const firstChunk = inputContent.substr(0, selectionStart);
+        contentInput.current.innerHTML=firstChunk+`<span style="font-weight:bold">${textToBolden}</span>`+secondChunk;
+        saveChanges();
+    }
+
     function handlePaste (e) {
         e.preventDefault();
-        let text = e.clipboardData.getData('text/plain');
-        let selectionIndex = document.getSelection().getRangeAt(0).startOffset;
-        let inputContent = contentInput.current.innerText; 
+        const text = e.clipboardData.getData('text/plain');
+        const selectionIndex = document.getSelection().getRangeAt(0).startOffset;
+        const inputContent = contentInput.current.innerText; 
         const secondChunk = inputContent.substr(selectionIndex, inputContent.length);
         const firstChunk = inputContent.substr(0, selectionIndex);
         contentInput.current.innerText = firstChunk + text + secondChunk;
@@ -58,9 +75,10 @@ const NoteForm = (props) => {
                 onInput={saveChanges} 
                 contentEditable="true" 
                 className={styles.content}
-                suppressContentEditableWarning={true}>
-                    {props.data.content}
-                </div>
+                suppressContentEditableWarning={true}
+                dangerouslySetInnerHTML={{__html: props.data.content}}>
+            </div>
+            <button type="button" onClick={boldenText}>make ur text bold!</button>
         </div>
     );
 };
